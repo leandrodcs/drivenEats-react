@@ -50,9 +50,12 @@ body {
   margin: 0 0 17px 16px;
 }
 .options-wrapper {
-  height: 224px;
-  margin-bottom: 19px;
   display: flex;
+  flex-direction: column;
+}
+.options-list {
+  display: flex;
+  height: 224px;
   overflow-x: scroll;
 }
 .option {
