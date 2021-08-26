@@ -102,6 +102,19 @@ body {
   position: absolute;
   bottom: 5px;
   right: 8px;
+  display: none;
+}
+.number span:nth-child(2) {
+  margin: 0 5px 0 5px;
+}
+.number span:nth-child(1) {
+  color: #aa1b1b;
+}
+.number span:nth-child(3) {
+  color: #3aac23;
+}
+.selected .number {
+  display: block;
 }
 
 /* FOOTER */

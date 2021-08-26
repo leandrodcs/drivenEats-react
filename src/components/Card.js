@@ -1,8 +1,38 @@
-export default function Card(props) {
-    const {name, img, price, description} = props.info;
+import React, { useState } from "react";
+
+export default function Card({info}) {
+    const {name, img, price, description} = info;
+    const [selected, setSelected] = useState("");
+    const [value, setValue] = useState(0);
+
+
+    function Add() {
+        setValue(value + 1);
+    }
+
+    function Decrease() {
+        setValue(value - 1);
+        if (value === 1) {
+            setSelected("");
+        }
+    }
+
+    function Select(e) {
+        setSelected("selected");
+        if (e.target.innerHTML === "-") {
+            Decrease();
+        }
+        if (e.target.innerHTML === "+") {
+            Add();
+        }
+        if (value === 0) {
+            setValue(value + 1);
+            return;
+        }
+    }
 
   return (
-    <div className="option food">
+    <div className={`option food ${selected}`} onClick={Select}>
       <img
         src={img}
         alt="Seu aparelho não consegue carregar a imagem"
@@ -14,7 +44,14 @@ export default function Card(props) {
       <div className="option-price">
         R$ <span className="price">{price}</span>
       </div>
-      <div className="number"></div>
+      <p className="number">
+          <span>-</span>
+          <span>{value}</span>
+          <span>+</span>
+      </p>
     </div>
   );
 }
+
+
+

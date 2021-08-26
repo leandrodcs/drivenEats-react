@@ -1,9 +1,7 @@
 import Card from "./Card";
 
 export default function Section({ title, foodInfo }) {
-  console.log(title);
-  console.log(foodInfo);
-
+    console.log(foodInfo)
   return (
     <>
       <div className="options-wrapper">
