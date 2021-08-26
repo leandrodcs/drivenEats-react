@@ -1,38 +1,31 @@
 import React, { useState } from "react";
 
 export default function Card({info}) {
-    const {name, img, price, description} = info;
-    const [selected, setSelected] = useState("");
+    const {name, img, price, description, selected, amount} = info;
     const [value, setValue] = useState(0);
 
-
-    function Add() {
+    function add() {
         setValue(value + 1);
     }
 
-    function Decrease() {
+    function decrease() {
         setValue(value - 1);
-        if (value === 1) {
-            setSelected("");
-        }
     }
 
-    function Select(e) {
-        setSelected("selected");
+    function select(e) {
         if (e.target.innerHTML === "-") {
-            Decrease();
+            decrease();
         }
         if (e.target.innerHTML === "+") {
-            Add();
+            add();
         }
         if (value === 0) {
             setValue(value + 1);
-            return;
         }
     }
-
+    
   return (
-    <div className={`option food ${selected}`} onClick={Select}>
+    <div className={`option food ${value > 0 ? "selected" : ""}`} onClick={select}>
       <img
         src={img}
         alt="Seu aparelho não consegue carregar a imagem"
