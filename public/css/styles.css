@@ -98,16 +98,10 @@ body {
   color: #000000;
   font-weight: 400;
 }
-.check {
-  display: block;
+.number {
   position: absolute;
   bottom: 5px;
   right: 8px;
-  display: none;
-}
-.check img {
-  width: 15.44px;
-  height: 15.44px;
 }
 
 /* FOOTER */
