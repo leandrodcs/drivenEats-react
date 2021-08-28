@@ -93,9 +93,9 @@ export default function App() {
     }
 
     function checkOrderState() {
-        const anyPlateSelected = order.plates.filter(p => p.amount !== 0).length;
-        const anyDrinkSelected = order.drinks.filter(p => p.amount !== 0).length;
-        const anyDessertSelected = order.desserts.filter(p => p.amount !== 0).length;
+        const anyPlateSelected = order.plates.filter(plate => plate.amount !== 0).length;
+        const anyDrinkSelected = order.drinks.filter(drink => drink.amount !== 0).length;
+        const anyDessertSelected = order.desserts.filter(dessert => dessert.amount !== 0).length;
         if (anyPlateSelected && anyDrinkSelected && anyDessertSelected) {
             setOrderState(true);
         }
@@ -119,10 +119,9 @@ export default function App() {
             </div>
             <ConfirmButton orderState={orderState} checkingOut={checkingOut} />
             {checkOut ? 
-                <ConfirmationPage checkingOut={checkingOut}/> 
+                <ConfirmationPage checkingOut={checkingOut} order={order}/> 
                 : ""
             }
-
         </>
     );
 }
