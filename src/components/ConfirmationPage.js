@@ -1,6 +1,6 @@
-export default function ConfirmationPage() {
+export default function ConfirmationPage({checkingOut}) {
   return (
-    <div className="confirm-page">
+    <div className="confirm-page appear">
       <div className="confirm-box">
         <div className="confirm-header">Confirme seu pedido</div>
         <div className="confirm-line">
@@ -20,7 +20,7 @@ export default function ConfirmationPage() {
           <div className="final price"></div>
         </div>
         <div className="final-confirm-button">Tudo certo, pode pedir!</div>
-        <div className="cancel">Cancelar</div>
+        <div className="cancel" onClick={() => checkingOut(false)}>Cancelar</div>
       </div>
     </div>
   );
