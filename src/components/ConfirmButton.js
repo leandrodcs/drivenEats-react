@@ -1,4 +1,6 @@
-export default function ConfirmButton({orderState, checkingOut}) {
+import { Link } from "react-router-dom";
+
+export default function ConfirmButton({orderState}) {
   return (
     <>
       <div className="confirm-wrapper">
@@ -6,9 +8,11 @@ export default function ConfirmButton({orderState, checkingOut}) {
           <div>Selecione os 3 itens para fechar o pedido</div>
         </div>
       </div>
-      <div className={`confirm-wrapper confirmation ${orderState ? "appear" : ""}`} onClick={() => checkingOut(true)}>
-        <div className="confirm-button green-button">Fechar pedido</div>
-      </div>
+      <Link className="no-sub" to="/revisar">
+        <div className={`confirm-wrapper confirmation ${orderState ? "appear" : ""}`}>
+          <div className="confirm-button green-button">Fechar pedido</div>
+        </div>
+      </Link>
     </>
   );
 }

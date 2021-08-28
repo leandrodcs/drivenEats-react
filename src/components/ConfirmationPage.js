@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 export default function ConfirmationPage({checkingOut, order}) {
   console.log(order);
@@ -58,7 +58,9 @@ export default function ConfirmationPage({checkingOut, order}) {
         </div>
       </div>
       <div className="final-confirm-button">Tudo certo, pode pedir!</div>
-      <div className="cancel" onClick={() => checkingOut(false)}>Cancelar</div>
+      <Link to="/">
+        <div className="cancel">Cancelar</div>
+      </Link>
     </div>
   );
 }

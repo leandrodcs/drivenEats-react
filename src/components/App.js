@@ -3,6 +3,7 @@ import Section from "./Section";
 import ConfirmButton from "./ConfirmButton";
 import ConfirmationPage from "./ConfirmationPage";
 import React, { useState } from "react";
+import { BrowserRouter,Route, Switch } from "react-router-dom";
 
 export default function App() {
 
@@ -26,7 +27,7 @@ export default function App() {
                 name: "Macarrãozão",
                 img: "assets/macarrao.jfif",
                 description: "Macarrão da hora feito na hora",
-                price: "17,90",
+                price: "17,90", 
                 amount: 0,
             },
         ],
@@ -104,23 +105,28 @@ export default function App() {
         }
     }
 
-    function checkingOut(state) {
-        setCheckOut(state);
-    }
+    // function checkingOut(state) {
+    //     setCheckOut(state);
+    // }
 
     return (
         <>
             <Header />
-            <div className="main">
-                <Section title={"Primeiro, sua comida"} mealInfo={plates} updateOrder={updateOrder} type="plates"/>
-                <Section title={"Agora, sua bebida"} mealInfo={drinks} updateOrder={updateOrder} type="drinks" />
-                <Section title={"Por fim, sua sobremesa"} mealInfo={desserts} updateOrder={updateOrder} type="desserts" />
-            </div>
-            <ConfirmButton orderState={orderState} checkingOut={checkingOut} />
-            {checkOut ? 
-                <ConfirmationPage checkingOut={checkingOut} order={order}/> 
-                : ""
-            }
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path="/" render={() => 
+                        <>
+                            <div className="main">
+                                <Section title={"Primeiro, sua comida"} mealInfo={plates} updateOrder={updateOrder} type="plates"/>
+                                <Section title={"Agora, sua bebida"} mealInfo={drinks} updateOrder={updateOrder} type="drinks" />
+                                <Section title={"Por fim, sua sobremesa"} mealInfo={desserts} updateOrder={updateOrder} type="desserts" />
+                            </div>
+                            <ConfirmButton orderState={orderState}/>
+                        </>
+                    } />
+                    <Route path="/revisar" render={() => <ConfirmationPage order={order}/>} />
+                </Switch>
+            </BrowserRouter>
         </>
     );
 }
