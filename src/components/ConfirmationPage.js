@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function ConfirmationPage({checkingOut, order}) {
+export default function ConfirmationPage({order}) {
   console.log(order);
   const {plates, drinks, desserts} = order;
   const final = [];

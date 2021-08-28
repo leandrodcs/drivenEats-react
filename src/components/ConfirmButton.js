@@ -8,7 +8,7 @@ export default function ConfirmButton({orderState}) {
           <div>Selecione os 3 itens para fechar o pedido</div>
         </div>
       </div>
-      <Link className="no-sub" to="/revisar">
+      <Link to="/revisar">
         <div className={`confirm-wrapper confirmation ${orderState ? "appear" : ""}`}>
           <div className="confirm-button green-button">Fechar pedido</div>
         </div>

@@ -15,6 +15,7 @@ export default function App() {
                 description: "Um pouco de batata, um pouco de salada",
                 price: "14,90",
                 amount: 0,
+                selected: false,
             },
             {
                 name: "Hamburgão",
@@ -22,6 +23,7 @@ export default function App() {
                 description: "Esse bixo é gostoso em",
                 price: "18,90",
                 amount: 0,
+                selected: false,
             },
             {
                 name: "Macarrãozão",
@@ -29,6 +31,7 @@ export default function App() {
                 description: "Macarrão da hora feito na hora",
                 price: "17,90", 
                 amount: 0,
+                selected: false,
             },
         ],
         drinks: [
@@ -38,6 +41,7 @@ export default function App() {
                 description: "Uma coquinha gelada e no capricho",
                 price: "5,00",
                 amount: 0,
+                selected: false,
             },
             {
                 name: "Suquinho",
@@ -45,6 +49,7 @@ export default function App() {
                 description: "Um suquinho gelado e no cacpricho",
                 price: "6,00",
                 amount: 0,
+                selected: false,
             },
             {
                 name: "Chazinho",
@@ -52,6 +57,7 @@ export default function App() {
                 description: "Um chazinho gelado e no cacpricho",
                 price: "7,00",
                 amount: 0,
+                selected: false,
             },
         ],
         desserts: [
@@ -61,6 +67,7 @@ export default function App() {
                 description: "Pudinzinho bem caprichado",
                 price: "8,00",
                 amount: 0,
+                selected: false,
             },
             {
                 name: "Chico balanceado",
@@ -68,6 +75,7 @@ export default function App() {
                 description: "Chico balanceado no capricho né",
                 price: "9,00",
                 amount: 0,
+                selected: false,
             },
             {
                 name: "Cupcakes",
@@ -75,21 +83,29 @@ export default function App() {
                 description: "Esses não estão no capricho",
                 price: "3,00",
                 amount: 0,
+                selected: false,
             },
         ],
-    };
-    const { plates, drinks, desserts } = meals;
+    }
     const [order, setOrder] = useState(meals);
+    const { plates, drinks, desserts } = order;
     const [orderState, setOrderState] = useState(false);
-    const [checkOut, setCheckOut] = useState(false);
 
     function updateOrder(name, amount, type) {
         order[type].forEach((meal) => {
             if(meal.name === name) {
                 meal.amount = amount;
             }
+            if(meal.amount > 0) {
+                meal.selected = true;
+            }
+            if(meal.amount === 0) {
+                meal.selected = false;
+            }
         });
         setOrder({...order});
+        console.log(order);
+        console.log(plates);
         checkOrderState();
     }
 
@@ -105,10 +121,6 @@ export default function App() {
         }
     }
 
-    // function checkingOut(state) {
-    //     setCheckOut(state);
-    // }
-
     return (
         <>
             <Header />
@@ -121,7 +133,7 @@ export default function App() {
                                 <Section title={"Agora, sua bebida"} mealInfo={drinks} updateOrder={updateOrder} type="drinks" />
                                 <Section title={"Por fim, sua sobremesa"} mealInfo={desserts} updateOrder={updateOrder} type="desserts" />
                             </div>
-                            <ConfirmButton orderState={orderState}/>
+                            <ConfirmButton orderState={orderState} />
                         </>
                     } />
                     <Route path="/revisar" render={() => <ConfirmationPage order={order}/>} />

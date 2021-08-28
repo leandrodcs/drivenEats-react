@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 
 export default function Card({info, updateOrder, type}) {
-    const {name, img, price, description} = info;
-    const [value, setValue] = useState(0);
+    const {name, img, price, description, selected, amount} = info;
+    const [value, setValue] = useState(amount);
 
     function add() {
         setValue(value + 1);
-        console.log(value);
     }
 
     function decrease() {
@@ -29,7 +28,7 @@ export default function Card({info, updateOrder, type}) {
     }
 
     return (
-        <div className={`option ${value > 0 ? "selected" : ""}`} onClick={select}>
+        <div className={`option ${selected ? "selected" : ""}`} onClick={select}>
           <img
             src={img}
             alt="Seu aparelho não consegue carregar a imagem"
