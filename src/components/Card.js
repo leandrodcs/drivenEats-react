@@ -39,8 +39,7 @@ export default function Card({info, updateOrder, type}) {
               {description}
           </div>
           <div className="option-price">
-                R$ 
-                <span className="price">{price}</span>
+                R$ <span className="price">{price}</span>
           </div>
           <p className="number">
               <span>-</span>

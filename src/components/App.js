@@ -102,7 +102,6 @@ export default function App() {
         else {
             setOrderState(false);
         }
-        console.log(orderState)
     }
 
     function checkingOut(state) {

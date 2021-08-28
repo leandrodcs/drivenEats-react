@@ -2,43 +2,59 @@
 
 export default function ConfirmationPage({checkingOut, order}) {
   console.log(order);
+  const {plates, drinks, desserts} = order;
+  const final = [];
+
+  function sumPrice(price) {
+    let finalPrice = 0;
+    price.forEach(p => {
+      finalPrice+= (p.price.replace(",", ".") * p.amount);
+    })
+    return finalPrice.toFixed(2).replace(".",",");
+  }
+
+  function organizeOrder() {
+    plates.forEach(plate => {
+      if(plate.amount) {
+        const item = plate;
+        item.type = "plate";
+        final.push(item);
+      }
+    })
+    drinks.forEach(drink => {
+      if(drink.amount) {
+        const item = drink;
+        item.type = "drink";
+        final.push(item);
+      }
+    })
+    desserts.forEach(dessert => {
+      if(dessert.amount) {
+        const item = dessert;
+        item.type = "dessert";
+        final.push(item);
+      }
+    })
+    console.log(final);
+    return final;
+  }
+
   return (
     <div className="confirm-page">
       <div className="confirm-header">Revise seu pedido</div>
       <div className="confirm-box">
-        {order.plates.map((plate) => {
-          if(plate.amount) {
-            return (
-              <div className="confirm-line">
-                <div>{plate.amount} {plate.name}</div>
-                <div>{plate.price}</div>
-              </div>
-            );
-          }
-        })}
-        {order.drinks.map((drink) => {
-          if(drink.amount) {
-            return (
-              <div className="confirm-line">
-                <div>{drink.amount} {drink.name}</div>
-                <div>{drink.price}</div>
-              </div>
-            );
-          }
-        })}
-        {order.desserts.map((dessert) => {
-          if(dessert.amount) {
-            return (
-              <div className="confirm-line">
-                <div>{dessert.amount} {dessert.name}</div>
-                <div>{dessert.price}</div>
-              </div>
-            );
-          }
+        {organizeOrder().map(o => {
+          <componente />
+          return (
+          <div className="confirm-line">
+            <div>{o.amount} {o.name}</div>
+            <div>{(o.price.replace(",", ".") * o.amount).toFixed(2).replace(".",",")}</div>
+          </div>
+          )
         })}
         <div className="confirm-line bold">
           <div>TOTAL</div>
-          <div>asdas</div>
+          <div>R$ {sumPrice(final)}</div>
         </div>
       </div>
       <div className="final-confirm-button">Tudo certo, pode pedir!</div>
