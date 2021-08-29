@@ -57,7 +57,7 @@ export default function ConfirmationPage({order}) {
     %0aTotal:%20R$%20${finalPrice.toFixed(2).replace(".",",")}
     `;
     console.log(finalMessage);
-    window.open(`https://wa.me/5545998022472?text=${finalMessage}`);
+    window.open(`https://wa.me/554598022472?text=${finalMessage}`);
   }
 
   return (
