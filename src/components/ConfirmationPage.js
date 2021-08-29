@@ -62,26 +62,27 @@ export default function ConfirmationPage({order}) {
 
   return (
     <div className="confirm-page">
-      <div className="confirm-header">Revise seu pedido</div>
-      <div className="confirm-box">
-        {organizeOrder().map(o => {
-          <componente />
-          return (
-          <div className="confirm-line">
-            <div>{o.amount} x {o.name}</div>
-            <div>{(o.price.replace(",", ".") * o.amount).toFixed(2).replace(".",",")}</div>
+      <div>
+        <div className="confirm-header">Revise seu pedido</div>
+        <div className="confirm-box">
+          {organizeOrder().map(o => {
+            <componente />
+            return (
+            <div className="confirm-line">
+              <div>{o.amount} x {o.name}</div>
+              <div>{(o.price.replace(",", ".") * o.amount).toFixed(2).replace(".",",")}</div>
+            </div>
+            )
+          })}
+          <div className="confirm-line bold">
+            <div>TOTAL</div>
+            <div>R$ {sumPrice(finalOrder)}</div>
           </div>
-          )
-        })}
-        <div className="confirm-line bold">
-          <div>TOTAL</div>
-          <div>R$ {sumPrice(finalOrder)}</div>
         </div>
       </div>
       <div className="final-confirm-button" onClick={whatsappMessage}>Tudo certo, pode pedir!</div>
-      <Link to="/">
-        <div className="cancel">Cancelar</div>
-      </Link>
+      <div className="cancel"><Link to="/">Cancelar</Link></div>
+
     </div>
   );
 }

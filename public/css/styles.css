@@ -213,6 +213,10 @@ body {
   font-size: 20px;
   line-height: 23px;
 }
+.cancel a {
+  color: #777777;
+  text-decoration: none;
+}
 .bold {
   font-weight: 700;
 }
