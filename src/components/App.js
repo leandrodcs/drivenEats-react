@@ -120,6 +120,7 @@ export default function App() {
             setOrderState(false);
         }
     }
+    console.log(order);
 
     return (
         <>
@@ -141,4 +142,5 @@ export default function App() {
             </BrowserRouter>
         </>
     );
+
 }

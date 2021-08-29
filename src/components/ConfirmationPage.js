@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 export default function ConfirmationPage({order}) {
   console.log(order);
   const {plates, drinks, desserts} = order;
-  const final = [];
+  const finalOrder = [];
+  let finalPrice = 0;
 
   function sumPrice(price) {
-    let finalPrice = 0;
+
     price.forEach(p => {
       finalPrice+= (p.price.replace(",", ".") * p.amount);
     })
@@ -18,25 +19,46 @@ export default function ConfirmationPage({order}) {
       if(plate.amount) {
         const item = plate;
         item.type = "plate";
-        final.push(item);
+        finalOrder.push(item);
       }
     })
     drinks.forEach(drink => {
       if(drink.amount) {
         const item = drink;
         item.type = "drink";
-        final.push(item);
+        finalOrder.push(item);
       }
     })
     desserts.forEach(dessert => {
       if(dessert.amount) {
         const item = dessert;
         item.type = "dessert";
-        final.push(item);
+        finalOrder.push(item);
       }
     })
-    console.log(final);
-    return final;
+    console.log(finalOrder);
+    return finalOrder;
+  }
+
+  function whatsappMessage(){
+    const platesMessage= `-%20Prato(s):%20${(finalOrder.filter(plate =>  plate.type === "plate")).map((plate) => { 
+      return `${plate.name}%20(${plate.amount}x)%20`
+    })}`
+    const drinksMessage= `%0a-%20Bebida(s):%20${(finalOrder.filter(drink =>  drink.type === "drink")).map((drink) => { 
+      return `${drink.name}%20(${drink.amount}x)%20`
+    })}`
+    const dessertsMessage= `%0a-%20Sobremesa(s):%20${(finalOrder.filter(dessert =>  dessert.type === "dessert")).map((dessert) => { 
+      return `${dessert.name}%20(${dessert.amount}x)%20`
+    })}`
+
+    const finalMessage = `Olá,%20gostaria%20de%20fazer%20o%20pedido:%0a
+    ${platesMessage}
+    ${drinksMessage}
+    ${dessertsMessage}
+    %0aTotal:%20R$%20${finalPrice}
+    `;
+    console.log(finalMessage);
+    window.location.replace(`https://wa.me/5545998022472?text=${finalMessage}`);
   }
 
   return (
@@ -47,17 +69,17 @@ export default function ConfirmationPage({order}) {
           <componente />
           return (
           <div className="confirm-line">
-            <div>{o.amount} {o.name}</div>
+            <div>{o.amount} x {o.name}</div>
             <div>{(o.price.replace(",", ".") * o.amount).toFixed(2).replace(".",",")}</div>
           </div>
           )
         })}
         <div className="confirm-line bold">
           <div>TOTAL</div>
-          <div>R$ {sumPrice(final)}</div>
+          <div>R$ {sumPrice(finalOrder)}</div>
         </div>
       </div>
-      <div className="final-confirm-button">Tudo certo, pode pedir!</div>
+      <div className="final-confirm-button" onClick={whatsappMessage}>Tudo certo, pode pedir!</div>
       <Link to="/">
         <div className="cancel">Cancelar</div>
       </Link>
