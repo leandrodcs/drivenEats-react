@@ -41,24 +41,23 @@ export default function ConfirmationPage({order}) {
   }
 
   function whatsappMessage(){
-    const platesMessage= `-%20Prato(s):%20${(finalOrder.filter(plate =>  plate.type === "plate")).map((plate) => { 
-      return `${plate.name}%20(${plate.amount}x)%20`
+    const platesMessage= `%0a-%20Prato(s):${(finalOrder.filter(plate =>  plate.type === "plate")).map((plate) => { 
+      return `%20${plate.name}%20(${plate.amount}x)`
     })}`
-    const drinksMessage= `%0a-%20Bebida(s):%20${(finalOrder.filter(drink =>  drink.type === "drink")).map((drink) => { 
-      return `${drink.name}%20(${drink.amount}x)%20`
+    const drinksMessage= `%0a-%20Bebida(s):${(finalOrder.filter(drink =>  drink.type === "drink")).map((drink) => { 
+      return `%20${drink.name}%20(${drink.amount}x)`
     })}`
     const dessertsMessage= `%0a-%20Sobremesa(s):%20${(finalOrder.filter(dessert =>  dessert.type === "dessert")).map((dessert) => { 
-      return `${dessert.name}%20(${dessert.amount}x)%20`
+      return `%20${dessert.name}%20(${dessert.amount}x)`
     })}`
-
-    const finalMessage = `Olá,%20gostaria%20de%20fazer%20o%20pedido:%0a
+    const finalMessage = `Olá,%20gostaria%20de%20fazer%20o%20pedido:
     ${platesMessage}
     ${drinksMessage}
     ${dessertsMessage}
-    %0aTotal:%20R$%20${finalPrice}
+    %0aTotal:%20R$%20${finalPrice.toFixed(2).replace(".",",")}
     `;
     console.log(finalMessage);
-    window.location.replace(`https://wa.me/5545998022472?text=${finalMessage}`);
+    window.open(`https://wa.me/5545998022472?text=${finalMessage}`);
   }
 
   return (
