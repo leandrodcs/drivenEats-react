@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 export default function ConfirmationPage({order}) {
-  console.log(order);
   const {plates, drinks, desserts} = order;
   const finalOrder = [];
   let finalPrice = 0;
@@ -36,7 +35,6 @@ export default function ConfirmationPage({order}) {
         finalOrder.push(item);
       }
     })
-    console.log(finalOrder);
     return finalOrder;
   }
 
@@ -56,7 +54,6 @@ export default function ConfirmationPage({order}) {
     ${dessertsMessage}
     %0aTotal:%20R$%20${finalPrice.toFixed(2).replace(".",",")}
     `;
-    console.log(finalMessage);
     window.open(`https://wa.me/554598022472?text=${finalMessage}`);
   }
 

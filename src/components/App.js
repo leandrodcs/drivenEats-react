@@ -104,8 +104,6 @@ export default function App() {
             }
         });
         setOrder({...order});
-        console.log(order);
-        console.log(plates);
         checkOrderState();
     }
 
@@ -120,7 +118,6 @@ export default function App() {
             setOrderState(false);
         }
     }
-    console.log(order);
 
     return (
         <>
